@@ -33,6 +33,11 @@ Variables need to be changed:
 - `DATABASE_PATH` - path to the Calibre database.
 - `CONFIG_PATH` - path to the Calibre-Web configuration.
 
+Additional, not mandatory variables:
+
+- PUID/PGID - user and group ids.
+- TZ - timezone.
+
 
 ## Troubleshooting
 
