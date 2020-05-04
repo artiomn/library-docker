@@ -1,3 +1,7 @@
+#
+# Library management service.
+#
+
 version: '2.1'
 
 networks:
