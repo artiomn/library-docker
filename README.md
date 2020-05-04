@@ -27,6 +27,8 @@ Your can install this service in 3 steps:
 - Launch the service, by the running command inside the directory with `docker-compose.yml`:
   `docker-compose up -d`
 
+After completing these steps, you will see the web-interface on port `8083`.
+
 Variables need to be changed:
 
 - `BOOKS_DIRECTORY` - path to the books directory.
