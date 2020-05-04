@@ -29,6 +29,8 @@ services:
       - docker0
     expose:
       - 8083
+    ports:
+      - 8083:8083
     volumes:
       - <BOOKS_DIRECTORY>:/books:ro
       - <DATABASE_PATH>/database:/data:rw
