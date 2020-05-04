@@ -1,0 +1,40 @@
+version: '2.1'
+
+networks:
+  calibre:
+  docker0:
+    external:
+      name: docker0
+
+services:
+  calibre:
+    restart: unless-stopped
+    build: ./calibre
+    networks:
+      - calibre
+    volumes:
+      - <BOOKS_DIRECTORY>:/books:ro
+      - <DATABASE_PATH>/database:/data:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PGID=100
+      - PUID=1004
+
+  calibre-web:
+    restart: unless-stopped
+    image: linuxserver/calibre-web
+    depends_on:
+      - calibre
+    networks:
+      - docker0
+    expose:
+      - 8083
+    volumes:
+      - <BOOKS_DIRECTORY>:/books:ro
+      - <DATABASE_PATH>/database:/data:rw
+      - <CONFIG_PATH>/calibre-web/config:/config:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Europe/Moscow
+      - PGID=33
+      - PUID=33
