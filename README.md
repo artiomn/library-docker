@@ -35,8 +35,10 @@ Variables need to be changed:
 
 Additional, not mandatory variables:
 
-- PUID/PGID - user and group ids.
-- TZ - timezone.
+- `PUID/PGID` - user and group ids.
+- `TZ` - timezone.
+
+See [Linuxserver.io documentation](https://github.com/linuxserver/docker-calibre-web#parameters).
 
 
 ## Troubleshooting
