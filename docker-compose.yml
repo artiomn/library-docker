@@ -17,8 +17,8 @@ services:
       - <DATABASE_PATH>/database:/data:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - PGID=100
-      - PUID=1004
+      - PGID=33
+      - PUID=33
 
   calibre-web:
     restart: unless-stopped
