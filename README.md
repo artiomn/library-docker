@@ -1,7 +1,10 @@
 # Library-docker
 
-This is full-featured book collection manage service.
-It uses:
+This is full-featured lightweight book collection management service, based on Calibre and inotify.
+It uses a patched version of Calibre and **doesn't copy your files inside the database**.
+
+
+## Features
 
 - Special [lightweight console version of Calibre](https://github.com/artiomn/calibre), which doesn't copy your files, but only creates symlinks.
 - A script to monitor the library directory and start Calibre database syncronization, when you complete to add book series.
