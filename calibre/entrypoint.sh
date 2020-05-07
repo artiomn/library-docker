@@ -19,7 +19,7 @@ _term() {
 
 sync_database() {
     echo "$(date) Database synchronization will be started..."
-    calibredb --with-library="${DB_DIR}" add -r -n "${BOOKS_DIR}"
+    calibredb --with-library="${DB_DIR}" add --ignore="${IGNORE_PATTERN}" --add="${ADD_PATTERN}" -r -n "${BOOKS_DIR}"
     date +%s > "${LAST_SYNC_FILE}"
     echo "$(date) Database finished..."
 }
@@ -62,18 +62,22 @@ monitor_directory() {
 }
 
 
-last_sync_time=$(cat "${LAST_SYNC_FILE}" 2>/dev/null || echo 0)
-last_sync_diff=$(($(date +%s) - ${last_sync_time}))
+main() {
+    last_sync_time=$(cat "${LAST_SYNC_FILE}" 2>/dev/null || echo 0)
+    last_sync_diff=$(($(date +%s) - ${last_sync_time}))
 
-trap _term SIGTERM
+    trap _term SIGTERM
 
-if [[ ${last_sync_diff} -ge ${INITIAL_SYNC_PERIOD} ]]; then
-    echo "Last sync difference (${last_sync_diff}) > ${INITIAL_SYNC_PERIOD}, starting synchonization..."
-    sync_database
-else
-    echo "Directory \"${BOOKS_DIR}\" doesn't need initial synchronization."
-fi
+    if [[ ${last_sync_diff} -ge ${INITIAL_SYNC_PERIOD} ]]; then
+        echo "Last sync difference (${last_sync_diff}) > ${INITIAL_SYNC_PERIOD}, starting synchonization..."
+        sync_database
+    else
+        echo "Directory \"${BOOKS_DIR}\" doesn't need initial synchronization."
+    fi
 
-echo "Start monitoring directory \"${BOOKS_DIR}\"..."
-monitor_directory "${BOOKS_DIR}" sync_database
+    echo "Start monitoring directory \"${BOOKS_DIR}\"..."
+    monitor_directory "${BOOKS_DIR}" sync_database
+}
+
+main "$@"; exit $?
 

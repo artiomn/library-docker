@@ -18,11 +18,13 @@ services:
       - calibre
     volumes:
       - <BOOKS_DIRECTORY>:/books:ro
-      - <DATABASE_PATH>/database:/data:rw
+      - <DATABASE_PATH>:/data:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - PGID=33
       - PUID=33
+      - IGNORE_PATTERN=
+      - ADD_PATTERN=
 
   calibre-web:
     restart: unless-stopped
@@ -33,12 +35,10 @@ services:
       - docker0
     expose:
       - 8083
-    ports:
-      - 8083:8083
     volumes:
       - <BOOKS_DIRECTORY>:/books:ro
-      - <DATABASE_PATH>/database:/data:rw
-      - <CONFIG_PATH>/calibre-web/config:/config:rw
+      - <DATABASE_PATH>:/data:rw
+      - <CONFIG_PATH>:/config:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - TZ=Europe/Moscow

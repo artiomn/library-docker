@@ -37,6 +37,8 @@ Variables need to be changed:
 
 Additional, not mandatory variables:
 
+- `IGNORE_PATTERN` - ignore glob expression passed to `calibredb --ignore=`.
+- `ADD_PATTERN` - add glob expression passed to `calibredb --add=`.
 - `PUID/PGID` - user and group ids.
 - `TZ` - timezone.
 
